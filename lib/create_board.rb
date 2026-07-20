@@ -1,4 +1,18 @@
 
+
+class CreateBoard
+  attr_reader :row, :column
+
+  def initialize(row, column)
+    @row = row
+    @column = column
+  end
+
+ 
+
+end
+
+
 test_board = Array.new(6) {Array.new(7, '-')}
 
 p test_board[0]
