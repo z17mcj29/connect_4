@@ -13,3 +13,16 @@
 
 # I think that is everything. I will start building it and see if anything else comes
 #  up. This is my first game built using testing so we will see how it goes.
+
+
+require_relative './lib/create_board'
+require_relative './lib/print_board'
+require_relative './lib/add_token.rb'
+
+test_board_instance = CreateBoard.new
+test_board = test_board_instance.new_board
+print_board = PrintBoard.new(test_board)
+print_board.print_board
+AddToken.new(test_board, 'x', 3)
+print_board= PrintBoard.new(test_board)
+print_board.print_board

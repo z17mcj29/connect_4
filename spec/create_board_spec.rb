@@ -8,8 +8,7 @@ describe CreateBoard do
     
      it 'returns all default values'do
      test_board = board.new_board
-     #need to find out the actual way to test whata an array contains.
-     expect(test_board[0][0].include?('-'))
+     expect(test_board.flatten.all?('-'))
     end
   end
 end

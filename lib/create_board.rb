@@ -1,16 +1,16 @@
 
 
 class CreateBoard
-  attr_reader :row, :column, :win_size
+  attr_reader :row, :column
 
   def initialize(row = 6, column = 7)
     @row = row
     @column = column
-    @win_size = win_size
+    
   end
 
   def new_board
-    Array.new(@column) {Array.new(@row, '-')}
+    Array.new(@row) {Array.new(@column, '-')}
   end
 
 end
