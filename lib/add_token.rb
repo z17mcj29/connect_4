@@ -1,15 +1,15 @@
 
 class AddToken
-  attr_reader :board, :pl_token, :index, :board_rows
+  # attr_reader :board, :pl_token, :index, :board_rows
 
-  def initialize(board, pl_token, index)
-    @board = board
-    @pl_token = pl_token
-    @index = index - 1
-    @board_rows = @board.length
-  end
+  # def initialize(board, pl_token, index)
+  #   @board = board
+  #   @pl_token = pl_token
+  #   @index = index - 1
+  #   @board_rows = @board.length
+  # end
 
-  def drop_token
+  def self.drop_token(board_array, pl_token, index)
     #I don't quite know the syntax, but I think I know what I want
     #to do. Here is my order of operations.
     #board row depth. Find out how many rows the board has.
@@ -27,10 +27,11 @@ class AddToken
     #  return board[i][index] = pl_token
     #I am still fuzzy on Ruby for loops. I need to now figure out how to
     #do this reverse for loop in Ruby.
-    
-    (0..@board_rows).reverse_each do |i|
-      next if board[i][index] != "-"
-      break board[i][index] = pl_token
+    board_rows = board_array.length - 1
+    (0..board_rows).reverse_each do |i|
+      next if board_array[i][index] != "-"
+      board_array[i][index] = pl_token
+      return board_array
     end
 
   end

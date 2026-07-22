@@ -19,10 +19,21 @@ require_relative './lib/create_board'
 require_relative './lib/print_board'
 require_relative './lib/add_token.rb'
 
-test_board_instance = CreateBoard.new
-test_board = test_board_instance.new_board
-print_board = PrintBoard.new(test_board)
-print_board.print_board
-AddToken.new(test_board, 'x', 3)
-print_board= PrintBoard.new(test_board)
-print_board.print_board
+test_board = CreateBoard.new_board(6, 7)
+#PrintBoard.print_board(test_board)
+AddToken.drop_token(test_board, 'x', 3)
+#PrintBoard.print_board(test_board)
+AddToken.drop_token(test_board, 'o', 3)
+PrintBoard.print_board(test_board)
+
+
+#Game Start Setup
+  #Create Board. Decide row and column lengths.
+  #Decide the size of the win-condition. Default 4
+  #Default tokens X and O, but give option to change them
+
+#Game Loop
+#Player Input
+#Game Logic Runs
+#Visual Elements run
+#Loop repeats or game ends.

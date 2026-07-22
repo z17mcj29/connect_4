@@ -1,17 +1,23 @@
 
 
 class CreateBoard
-  attr_reader :row, :column
+  # attr_reader :row, :column
 
-  def initialize(row = 6, column = 7)
-    @row = row
-    @column = column
+  # def initialize(row = 6, column = 7)
+  #   @row = row
+  #   @column = column
     
-  end
+  # end
 
-  def new_board
-    Array.new(@row) {Array.new(@column, '-')}
+  # def new_board
+  #   Array.new(@row) {Array.new(@column, '-')}
+  # end
+
+  def self.new_board(row, column)
+    Array.new(row) {Array.new(column, '-')}
   end
+  #to use this I go
+  #new_board = CreateBoard.new_board(6,7)
 
 end
 
