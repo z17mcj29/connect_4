@@ -3,20 +3,29 @@
 require_relative '../lib/create_player'
 
 describe CreatePlayer do
+  subject(:test_player) {described_class.new('x', 7)}
   
   it 'returns proper token ' do
-    test_player = CreatePlayer.new('x')
+    #test_player = CreatePlayer.new('x', 7)
     expect(test_player.token).to eq('x')
   end
 
-  it 'returns legal column value'
-  subject(:test_player) {described_class.new('x', 7)}
-  test_value = CreatePlayer.player_input
-  #I'm still struggling with figuring the proper way to
-  #do this test.
-  allow(test_player).to receive(:gets).and_return("5\n")
-  #choice to return a specific number out of my range. Will
-  #have to research that.
-  expect(test_player.player_input).to eq(5)
+  it 'returns legal column value' do
+    #subject(:test_player) {described_class.new('x', 7)}  
+    
+    allow(test_player).to receive(:gets).and_return("5\n")
+    expect(test_player.player_input).to eq(5)
+  end
+
+  it 'returns nil if invalid number passed' do
+    allow(test_player).to receive(:gets).and_return("1134\n")
+    expect(test_player.player_input).to eq(nil)
+  end
+
+  context 'test the random_input' do
+    it 'returns a number between 1 and column width' do
+      expect(test_player.random_input).to be_positive.and be <= 7
+    end
+  end
 end
 

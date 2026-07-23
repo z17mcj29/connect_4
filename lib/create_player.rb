@@ -7,16 +7,19 @@ class CreatePlayer
     @column_width = column_width
   end
 
-  def self.player_input
+  def player_input
+    loop do
     #get input
     input = gets.chomp
+    num = input.to_i
     #validate input is between 1 and column_width
-    return input if input.match(/^\d+$[1-@column_width]/) && (input >= 1 && input <= column_width)
-    #Repeat until valid choice is selected
-    #Return valid selection
+    if input.match(/^\d+$/) && (num >= 1 && num <= @column_width)
+      return num
+    end    
+  end
   end
 
-  def self.random_input
+  def random_input
     rand(1..@column_width)
   end
 

@@ -18,13 +18,14 @@
 require_relative './lib/create_board'
 require_relative './lib/print_board'
 require_relative './lib/add_token.rb'
+require_relative './lib/create_player'
 
-test_board = CreateBoard.new_board(6, 7)
-#PrintBoard.print_board(test_board)
-AddToken.drop_token(test_board, 'x', 3)
-#PrintBoard.print_board(test_board)
-AddToken.drop_token(test_board, 'o', 3)
-PrintBoard.print_board(test_board)
+# test_board = CreateBoard.new_board(6, 7)
+# #PrintBoard.print_board(test_board)
+# AddToken.drop_token(test_board, 'x', 3)
+# #PrintBoard.print_board(test_board)
+# AddToken.drop_token(test_board, 'o', 3)
+# PrintBoard.print_board(test_board)
 
 
 #Game Start Setup
@@ -32,14 +33,25 @@ PrintBoard.print_board(test_board)
   #Decide the size of the win-condition. Default 4
   #Default tokens X and O, but give option to change them
   game_board = CreateBoard.new_board(6, 7)
-  row_width = game_board[][].length #need to figure out row width. I don't know the formula yet
-  player_one = Player.new_player('x', row_width)
-  player_two = Player.new_player('o', row_width)
+  column_width = game_board[0].length #need to figure out row width. I don't know the formula yet
+  player_one = CreatePlayer.new('x', column_width)
+  player_two = CreatePlayer.new('o', column_width)
   game_over = false
+  game_turn = true
+  index = ''
+  pl_token = ''
 #Game Loop
 while(!game_over)
   #Player Input
+  game_turn ? index = player_one.player_input : index = player_two.player_input
+  game_turn ? pl_token = player_one.token : pl_token = player_two.token
+  game_turn ? game_turn = false : game_turn = true
+  AddToken.drop_token(game_board, pl_token, index)
   #Game Logic Runs
   #Visual Elements run
+  PrintBoard.print_board(game_board)
+  puts ''
+  puts ''
+  puts ''
   #Loop repeats or game ends.
 end
