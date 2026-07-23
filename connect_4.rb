@@ -32,11 +32,14 @@ PrintBoard.print_board(test_board)
   #Decide the size of the win-condition. Default 4
   #Default tokens X and O, but give option to change them
   game_board = CreateBoard.new_board(6, 7)
-  player_one = Player.new_player('x')
-  player_two = Player.new_player('o')
-
+  row_width = game_board[][].length #need to figure out row width. I don't know the formula yet
+  player_one = Player.new_player('x', row_width)
+  player_two = Player.new_player('o', row_width)
+  game_over = false
 #Game Loop
-#Player Input
-#Game Logic Runs
-#Visual Elements run
-#Loop repeats or game ends.
+while(!game_over)
+  #Player Input
+  #Game Logic Runs
+  #Visual Elements run
+  #Loop repeats or game ends.
+end

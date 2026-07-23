@@ -10,8 +10,10 @@ describe CreatePlayer do
   end
 
   it 'returns legal column value'
-  #This doesn't work, returns a scope error. Need to research further
-  test_player = CreatePlayer.new('x', 7)
+  subject(:test_player) {described_class.new('x', 7)}
+  test_value = CreatePlayer.player_input
+  #I'm still struggling with figuring the proper way to
+  #do this test.
   allow(test_player).to receive(:gets).and_return("5\n")
   #choice to return a specific number out of my range. Will
   #have to research that.
