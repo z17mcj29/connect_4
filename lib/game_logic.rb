@@ -23,7 +23,8 @@ class GameLogic
     col_index = index.to_i
     (0..board_rows).each do |i|
       next if board[i][col_index] == '-'
-      break row_index = i
+      row_index = i
+      break
     end
     #perform win logic on that token spot
     (0...win_length).each do |i|
@@ -33,8 +34,9 @@ class GameLogic
       #flexible win condition size. I am going to get it working
       #with 4 token win condition and then figure out
       #how to refactor.
-      next if board[row_index][col_index - i + (win_length - 1)] == nil
-      next if board[row_index][col_index - i] == nil
+      next if board.dig(row_index,col_index - i + (win_length - 1)) == nil
+      #next if board.dig(row_index, col_index - i) < 0
+      next if board.dig(row_index, col_index - i) == "-"
       return true if [board[row_index][col_index - i],
                       board[row_index][col_index - i + 1],
                       board[row_index][col_index - i + 2],
@@ -43,8 +45,9 @@ class GameLogic
     (0...win_length).each do |i|
       #angle check
       #bounds check
-      next if board[row_index - i + (win_length - 1)][col_index - i + (win_length - 1)] == nil
-      next if board[row_index - i][col_index - i] == nil
+      next if board.dig(row_index - i + (win_length - 1),col_index - i + (win_length - 1)) == nil
+      #next if board.dig(row_index - i, col_index - i) < 0
+      next if board.dig(row_index - i, col_index - i) == "-"
       return true if [board[row_index - i][col_index - i],
                      board[row_index - i + 1][col_index - i + 1],
                      board[row_index - i + 2][col_index - i + 2],

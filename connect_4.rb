@@ -56,7 +56,7 @@ while(!game_over)
     game_over = true
   end
   if GameLogic.game_win(game_board, index )
-    puts "Thank you for playing ${game_turn ? 'Player One Wins' : 'Player Two Wins'}"
+    puts "Thank you for playing #{game_turn ? 'Player One Wins' : 'Player Two Wins'}"
     game_over = true
   end
   #Visual Elements run
