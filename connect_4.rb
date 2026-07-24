@@ -19,6 +19,7 @@ require_relative './lib/create_board'
 require_relative './lib/print_board'
 require_relative './lib/add_token.rb'
 require_relative './lib/create_player'
+require_relative './lib/game_logic'
 
 # test_board = CreateBoard.new_board(6, 7)
 # #PrintBoard.print_board(test_board)
@@ -43,11 +44,21 @@ require_relative './lib/create_player'
 #Game Loop
 while(!game_over)
   #Player Input
-  game_turn ? index = player_one.player_input(game_board) : index = player_two.player_input(game_board)
+  puts 'Please enter a number between 1 and 7 to place your token'
+  puts ''
+  game_turn ? index = player_one.player_input(game_board) - 1 : index = player_two.player_input(game_board) - 1
   game_turn ? pl_token = player_one.token : pl_token = player_two.token
   game_turn ? game_turn = false : game_turn = true
   AddToken.drop_token(game_board, pl_token, index)
   #Game Logic Runs
+  if GameLogic.game_tie(game_board) then
+    puts 'Thank you for playing. The game has ended in a tie. Please try again'
+    game_over = true
+  end
+  if GameLogic.game_win(game_board, index )
+    puts "Thank you for playing ${game_turn ? 'Player One Wins' : 'Player Two Wins'}"
+    game_over = true
+  end
   #Visual Elements run
   PrintBoard.print_board(game_board)
   puts ''
