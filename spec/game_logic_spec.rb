@@ -18,4 +18,29 @@ describe GameLogic do
     expect(GameLogic.game_tie(test_board)).to eq(false)
     end
   end
+
+  context 'Returns "true" game Won' do
+    it 'returns game won' do
+      test_board = [['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', 'x', 'x', 'x', 'x', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],]
+    expect(GameLogic.game_win(test_board, 'x', 2)).to eq(true)
+    end
+  end
+  context 'Returns "true" game Won' do
+    it 'returns game won' do
+      test_board = [['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', 'x', '-', '-', '-', '-', '-'],
+                    ['-', '-', 'x', '-', '-', '-', '-'],
+                    ['-', '-', '-', 'x', '-', '-', '-'],
+                    ['-', '-', '-', '-', 'x', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],]
+    expect(GameLogic.game_win(test_board, 'x', 2)).to eq(true)
+    end
+  end
+
+
 end

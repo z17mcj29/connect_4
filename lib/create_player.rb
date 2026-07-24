@@ -7,14 +7,14 @@ class CreatePlayer
     @column_width = column_width
   end
 
-  def player_input
+  def player_input(board)
     loop do
     #get input
     input = gets.chomp
     num = input.to_i
     #validate input is between 1 and column_width
     if input.match(/^\d+$/) && (num >= 1 && num <= @column_width)
-      return num
+      return num if board[0][num - 1] == '-'
     end    
   end
   end

@@ -43,7 +43,7 @@ require_relative './lib/create_player'
 #Game Loop
 while(!game_over)
   #Player Input
-  game_turn ? index = player_one.player_input : index = player_two.player_input
+  game_turn ? index = player_one.player_input(game_board) : index = player_two.player_input(game_board)
   game_turn ? pl_token = player_one.token : pl_token = player_two.token
   game_turn ? game_turn = false : game_turn = true
   AddToken.drop_token(game_board, pl_token, index)
