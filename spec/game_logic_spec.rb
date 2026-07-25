@@ -27,7 +27,7 @@ describe GameLogic do
                     ['-', '-', '-', '-', '-', '-', '-'],
                     ['-', '-', '-', '-', '-', '-', '-'],
                     ['-', '-', '-', '-', '-', '-', '-'],]
-    expect(GameLogic.game_win(test_board, 'x', 2)).to eq(true)
+    expect(GameLogic.game_win(test_board, 2)).to eq(true)
     end
   end
   context 'Returns "true" game Won' do
@@ -38,7 +38,18 @@ describe GameLogic do
                     ['-', '-', '-', 'x', '-', '-', '-'],
                     ['-', '-', '-', '-', 'x', '-', '-'],
                     ['-', '-', '-', '-', '-', '-', '-'],]
-    expect(GameLogic.game_win(test_board, 'x', 2)).to eq(true)
+    expect(GameLogic.game_win(test_board, 2)).to eq(true)
+    end
+  end
+  context 'Returns "true" game Won' do
+    it 'returns game won up right direction' do
+      test_board = [['-', '-', '-', '-', 'x', '-', '-'],
+                    ['-', '-', '-', 'x', '-', '-', '-'],
+                    ['-', '-', 'x', '-', '-', '-', '-'],
+                    ['-', 'x', '-', '-', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],]
+    expect(GameLogic.game_win(test_board, 2)).to eq(true)
     end
   end
 

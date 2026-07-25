@@ -193,7 +193,11 @@ class GameLogic
       return true if [board[row_index - i][col_index - i],
                      board[row_index - i + 1][col_index - i + 1],
                      board[row_index - i + 2][col_index - i + 2],
-                     board[row_index - i + 3][col_index - i + 3]].all? { |el| el == board[row_index][col_index] }
+                     board[row_index - i + 3][col_index - i + 3]].all? { |el| el == board[row_index][col_index] } ||
+                     [board[row_index - i][col_index - i],
+                     board[row_index - i - 1][col_index - i + 1],
+                     board[row_index - i - 2][col_index - i + 2],
+                     board[row_index - i - 3][col_index - i + 3]].all? { |el| el == board[row_index][col_index] }
       end
       #My final check will be straight down.
       (0...win_length - 1).each do |i|
