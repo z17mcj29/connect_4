@@ -9,7 +9,7 @@ class GameLogic
     end
   end
 
-  def self.game_win_doesnt_word(board, index, win_length = 4)
+  def self.game_win_doesnt_work(board, index, win_length = 4)
     #locate exact location of most recent token
     #I want to do something like this
     #board[0][col_index] check if == token
@@ -58,7 +58,7 @@ class GameLogic
     end
   end
 
-  def self.game_win(board, index, win_length = 4)
+  def self.game_win_doesnt_work_2(board, index, win_length = 4)
     #attempt # 2 at game win. Couldn't figure out the logic with last attempt
     #I"m going to take a slightly different approach this time
     
@@ -209,6 +209,183 @@ class GameLogic
                         board[row_index + 3][col_index]].all? { |el| el == board[row_index][col_index] }
       end
       false
-  end 
+  end
+
+  def self.find_token_coordinates(board, index)
+    board_rows = board.length - 1
+    col_index = index.to_i
+    row_index = 0
+
+    (0..board_rows).each do |i|
+      next if board[i][col_index] == '-'
+      row_index = i
+      break
+    end
+    { row: row_index, col: col_index }
+  end
+
+  def self.prove_line(board, coords, vector, win_length = 4)
+    token = board[coords[:row]][coords[:col]]
+    board_width = board[0].length - 1
+    board_height = board.length - 1
+    (1...win_length).each do |i|
+      current_token = board[coords[:row] + (i * vector[:row])][coords[:col] + (i * vector[:col])]
+      next if token != current_token
+      row_top_check = coords[:row] - vector[:row] * i
+      row_bottom_check = coords[:row] + vector[:row] * i
+      col_left_check = coords[:col] - vector[:col] * i
+      col_right_check = coords[:col] + vector[:col] * i
+      next if row_top_check < 0 || col_left_check < 0
+      next if row_bottom_check > board_height || col_right_check > board_width
+      return true
+    end
+    return false
+  end
+
+  def self.game_win_doesnt_work_3(board, index, win_length = 4)
+    coordinates = find_token_coordinates(board, index)
+  end
+
+  def self.game_win(b)
+    #I've been on this problem for four days now and haven't solved it. I want to finish this
+    #project and move on to the next lesson so I am going to do the board manually. I know
+    #that I have computer science coming up so I might come back and revisit this and work
+    #to get it working with a variable board and variable win condition. I think I can solve this
+    #problem but I have been thinking about it intently and working on it and haven't solved it
+    #yet. I think if I finish this and move on I will be able to continue to think about it and
+    #then come back and do it how I want later. Right now I'm going to make this manual board solve
+    #and move on.
+    
+    #region Horizontal Checks
+      return true if [b[0][0], b[0][1], b[0][2], b[0][3]].all? { |el| el == b[0][0] && el != '-'}
+      return true if [b[0][1], b[0][2], b[0][3], b[0][4]].all? { |el| el == b[0][1] && el != '-'}
+      return true if [b[0][2], b[0][3], b[0][4], b[0][5]].all? { |el| el == b[0][2] && el != '-'}
+      return true if [b[0][3], b[0][4], b[0][5], b[0][6]].all? { |el| el == b[0][3] && el != '-'}
+
+      return true if [b[1][0], b[1][1], b[1][2], b[1][3]].all? { |el| el == b[1][0] && el != '-'}
+      return true if [b[1][1], b[1][2], b[1][3], b[1][4]].all? { |el| el == b[1][1] && el != '-'}
+      return true if [b[1][2], b[1][3], b[1][4], b[1][5]].all? { |el| el == b[1][2] && el != '-'}
+      return true if [b[1][3], b[1][4], b[1][5], b[1][6]].all? { |el| el == b[1][3] && el != '-'}
+
+      return true if [b[2][0], b[2][1], b[2][2], b[2][3]].all? { |el| el == b[2][0] && el != '-'}
+      return true if [b[2][1], b[2][2], b[2][3], b[2][4]].all? { |el| el == b[2][1] && el != '-'}
+      return true if [b[2][2], b[2][3], b[2][4], b[2][5]].all? { |el| el == b[2][2] && el != '-'}
+      return true if [b[2][3], b[2][4], b[2][5], b[2][6]].all? { |el| el == b[2][3] && el != '-'}
+
+      return true if [b[3][0], b[3][1], b[3][2], b[3][3]].all? { |el| el == b[3][0] && el != '-'}
+      return true if [b[3][1], b[3][2], b[3][3], b[3][4]].all? { |el| el == b[3][1] && el != '-'}
+      return true if [b[3][2], b[3][3], b[3][4], b[3][5]].all? { |el| el == b[3][2] && el != '-'}
+      return true if [b[3][3], b[3][4], b[3][5], b[3][6]].all? { |el| el == b[3][3] && el != '-'}
+
+      return true if [b[4][0], b[4][1], b[4][2], b[4][3]].all? { |el| el == b[4][0] && el != '-'}
+      return true if [b[4][1], b[4][2], b[4][3], b[4][4]].all? { |el| el == b[4][1] && el != '-'}
+      return true if [b[4][2], b[4][3], b[4][4], b[4][5]].all? { |el| el == b[4][2] && el != '-'}
+      return true if [b[4][3], b[4][4], b[4][5], b[4][6]].all? { |el| el == b[4][3] && el != '-'}
+
+      return true if [b[5][0], b[5][1], b[5][2], b[5][3]].all? { |el| el == b[5][0] && el != '-'}
+      return true if [b[5][1], b[5][2], b[5][3], b[5][4]].all? { |el| el == b[5][1] && el != '-'}
+      return true if [b[5][2], b[5][3], b[5][4], b[5][5]].all? { |el| el == b[5][2] && el != '-'}
+      return true if [b[5][3], b[5][4], b[5][5], b[5][6]].all? { |el| el == b[5][3] && el != '-'}
+    #endregion
+
+    #region Down Checks
+
+      return true if [b[0][0], b[1][0], b[2][0], b[3][0]].all? { |el| el == b[0][0] && el != '-'}
+      return true if [b[1][0], b[2][0], b[3][0], b[4][0]].all? { |el| el == b[1][0] && el != '-'}
+      return true if [b[2][0], b[3][0], b[4][0], b[5][0]].all? { |el| el == b[2][0] && el != '-'}
+      
+      return true if [b[0][1], b[1][1], b[2][1], b[3][1]].all? { |el| el == b[0][1] && el != '-'}
+      return true if [b[1][1], b[2][1], b[3][1], b[4][1]].all? { |el| el == b[1][1] && el != '-'}
+      return true if [b[2][1], b[3][1], b[4][1], b[5][1]].all? { |el| el == b[2][1] && el != '-'}
+
+      return true if [b[0][2], b[1][2], b[2][2], b[3][2]].all? { |el| el == b[0][2] && el != '-'}
+      return true if [b[1][2], b[2][2], b[3][2], b[4][2]].all? { |el| el == b[1][2] && el != '-'}
+      return true if [b[2][2], b[3][2], b[4][2], b[5][2]].all? { |el| el == b[2][2] && el != '-'}
+
+      return true if [b[0][3], b[1][3], b[2][3], b[3][3]].all? { |el| el == b[0][3] && el != '-'}
+      return true if [b[1][3], b[2][3], b[3][3], b[4][3]].all? { |el| el == b[1][3] && el != '-'}
+      return true if [b[2][3], b[3][3], b[4][3], b[5][3]].all? { |el| el == b[2][3] && el != '-'}
+
+      return true if [b[0][4], b[1][4], b[2][4], b[3][4]].all? { |el| el == b[0][4] && el != '-'}
+      return true if [b[1][4], b[2][4], b[3][4], b[4][4]].all? { |el| el == b[1][4] && el != '-'}
+      return true if [b[2][4], b[3][4], b[4][4], b[5][4]].all? { |el| el == b[2][4] && el != '-'}
+
+      return true if [b[0][5], b[1][5], b[2][5], b[3][5]].all? { |el| el == b[0][5] && el != '-'}
+      return true if [b[1][5], b[2][5], b[3][5], b[4][5]].all? { |el| el == b[1][5] && el != '-'}
+      return true if [b[2][5], b[3][5], b[4][5], b[5][5]].all? { |el| el == b[2][5] && el != '-'}
+
+      return true if [b[0][6], b[1][6], b[2][6], b[3][6]].all? { |el| el == b[0][6] && el != '-'}
+      return true if [b[1][6], b[2][6], b[3][6], b[4][6]].all? { |el| el == b[1][6] && el != '-'}
+      return true if [b[2][6], b[3][6], b[4][6], b[5][6]].all? { |el| el == b[2][6] && el != '-'}
+    
+    #endregion
+    
+    #region Diagonal Checks
+    #   0   1    2    3    4    5    6
+    #[['-','-', '-', 'A', 'B', 'C', 'D'], 0
+    # ['-','-', 'A', 'B', 'C', 'D', 'E'], 1
+    # ['-','A', 'B', 'C', 'D', 'E', 'F'], 2
+    # ['A','B', 'C', 'D', 'E', 'F', '-'], 3
+    # ['B','C', 'D', 'E', 'F', '-', '-'], 4
+    # ['C','D', 'E', 'F', '-', '-', '-']] 5
+      return true if [b[0][3], b[1][2], b[2][1], b[3][0]].all? { |el| el == b[0][3] && el != '-'} #A track
+      return true if [b[0][4], b[1][3], b[2][2], b[3][1]].all? { |el| el == b[0][4] && el != '-'} #B track
+      return true if [b[1][3], b[2][2], b[3][1], b[4][0]].all? { |el| el == b[1][3] && el != '-'} #B track
+      return true if [b[0][5], b[1][4], b[2][3], b[3][2]].all? { |el| el == b[0][5] && el != '-'} #C track
+      return true if [b[1][4], b[2][3], b[3][2], b[4][1]].all? { |el| el == b[1][4] && el != '-'} #C track
+      return true if [b[2][3], b[3][2], b[4][1], b[5][0]].all? { |el| el == b[2][3] && el != '-'} #C track
+      return true if [b[0][6], b[1][5], b[2][4], b[3][3]].all? { |el| el == b[0][6] && el != '-'} #D track
+      return true if [b[1][5], b[2][4], b[3][3], b[4][2]].all? { |el| el == b[1][5] && el != '-'} #D track
+      return true if [b[2][4], b[3][3], b[4][2], b[5][1]].all? { |el| el == b[2][4] && el != '-'} #D track
+      return true if [b[1][6], b[2][5], b[3][4], b[4][3]].all? { |el| el == b[1][6] && el != '-'} #E track
+      return true if [b[2][5], b[3][4], b[4][3], b[5][2]].all? { |el| el == b[0][4] && el != '-'} #E track
+      return true if [b[2][6], b[3][5], b[4][4], b[5][3]].all? { |el| el == b[2][6] && el != '-'} #F track
+
+      # 0   1    2    3    4    5    6
+    #[['D','C', 'B', 'A', '-', '-', '-'], 0
+    # ['E','D', 'C', 'B', 'A', '-', '-'], 1
+    # ['F','E', 'D', 'C', 'B', 'A', '-'], 2
+    # ['-','F', 'E', 'D', 'C', 'B', 'A'], 3
+    # ['-','-', 'F', 'E', 'D', 'C', 'B'], 4
+    # ['-','-', '-', 'F', 'E', 'D', 'C']] 5
+      return true if [b[0][3], b[1][4], b[2][5], b[3][6]].all? { |el| el == b[0][3] && el != '-'} #A track
+      return true if [b[0][2], b[1][3], b[2][4], b[3][5]].all? { |el| el == b[0][2] && el != '-'} #B track
+      return true if [b[1][3], b[2][4], b[3][5], b[4][6]].all? { |el| el == b[1][3] && el != '-'} #B track
+      return true if [b[0][1], b[1][2], b[2][3], b[3][4]].all? { |el| el == b[0][1] && el != '-'} #C track
+      return true if [b[1][2], b[2][3], b[3][4], b[4][5]].all? { |el| el == b[1][2] && el != '-'} #C track
+      return true if [b[2][3], b[3][4], b[4][5], b[5][6]].all? { |el| el == b[2][3] && el != '-'} #C track
+      return true if [b[0][0], b[1][1], b[2][2], b[3][3]].all? { |el| el == b[0][0] && el != '-'} #D track
+      return true if [b[1][1], b[2][2], b[3][3], b[4][4]].all? { |el| el == b[1][1] && el != '-'} #D track
+      return true if [b[2][2], b[3][3], b[4][4], b[5][5]].all? { |el| el == b[2][2] && el != '-'} #D track
+      return true if [b[1][0], b[2][1], b[3][2], b[4][3]].all? { |el| el == b[1][0] && el != '-'} #E track
+      return true if [b[2][1], b[3][2], b[4][3], b[5][4]].all? { |el| el == b[2][1] && el != '-'} #E track
+      return true if [b[2][0], b[3][1], b[4][2], b[5][3]].all? { |el| el == b[2][0] && el != '-'} #F track
+
+    #endregion
+
+    return false
+  end
+  
+ 
 end
 
+#region Prove_Line Notes
+#
+  #I have the intial coordinates now with find_token_coordinates.
+  #I need to figure out how to test in a straight line in any
+  #direction win_length - 1. The initial coordinate is one of
+  #the lengths. My vector will be an array with an X and Y axis
+  #+x (positive X) is right -x (negative x) is left
+  #+y (positive Y) is down -y (negative y) is up
+  #vector = [-1, 1] would be left and down
+  #vector = [1, 1] would be rigth and down
+  #I have to figure out logic that if my vector has a negative
+  #number it contiues negative for each iteration.
+  #I need to create a bounding check that if it hits an edge it
+  #ignored the result and goes to the next check.
+  #I should be able to enter the following when I'm done and get
+  #a true or false
+  #GameLogic.get_line(game_board, {row:3, col:4}, [1,1]) and it will tell me
+  #if the line going right and down is legal and the same token
+  #
+#endregion

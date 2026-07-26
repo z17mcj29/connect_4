@@ -27,7 +27,7 @@ describe GameLogic do
                     ['-', '-', '-', '-', '-', '-', '-'],
                     ['-', '-', '-', '-', '-', '-', '-'],
                     ['-', '-', '-', '-', '-', '-', '-'],]
-    expect(GameLogic.game_win(test_board, 2)).to eq(true)
+    expect(GameLogic.game_win(test_board)).to eq(true)
     end
   end
   context 'Returns "true" game Won' do
@@ -38,7 +38,7 @@ describe GameLogic do
                     ['-', '-', '-', 'x', '-', '-', '-'],
                     ['-', '-', '-', '-', 'x', '-', '-'],
                     ['-', '-', '-', '-', '-', '-', '-'],]
-    expect(GameLogic.game_win(test_board, 2)).to eq(true)
+    expect(GameLogic.game_win(test_board)).to eq(true)
     end
   end
   context 'Returns "true" game Won' do
@@ -49,7 +49,49 @@ describe GameLogic do
                     ['-', 'x', '-', '-', '-', '-', '-'],
                     ['-', '-', '-', '-', '-', '-', '-'],
                     ['-', '-', '-', '-', '-', '-', '-'],]
-    expect(GameLogic.game_win(test_board, 2)).to eq(true)
+    expect(GameLogic.game_win(test_board)).to eq(true)
+    end
+  end
+
+  context 'Returns "true" game Won' do
+    it 'returns game won up right direction' do
+      test_board = [['-', '-', '-', '-', 'x', '-', '-'],
+                    ['-', '-', '-', 'x', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', 'x', '-', '-', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],]
+    expect(GameLogic.game_win(test_board)).to eq(false)
+    end
+  end
+
+  context 'Make sure I have the right coordinate' do
+    it 'checks coordinates' do
+      test_board = [['-', '-', '-', '-', 'x', '-', '-'],
+                    ['-', '-', '-', 'x', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', 'x', '-', '-', '-', '-', '-'],
+                    ['-', '-', 'x', '-', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],]
+      coordinates = GameLogic.find_token_coordinates(test_board, 2)
+      expect(coordinates[:row]).to eq(4)
+      expect(coordinates[:col]).to eq(2)
+    end
+  end
+
+  context 'Check #prove_line' do
+    it 'checks left true' do
+      test_board = [['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', 'x', 'x', 'x', 'x', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],
+                    ['-', 'x', '-', '-', '-', '-', '-'],
+                    ['-', '-', 'x', '-', '-', '-', '-'],
+                    ['-', '-', '-', '-', '-', '-', '-'],]
+      coordinates = GameLogic.find_token_coordinates(test_board, 4)
+      coordiantes2 = GameLogic.find_token_coordinates(test_board, 1)
+      vec = { row: 0, col: -1}
+      expect(GameLogic.prove_line(test_board, coordinates, vec)).to eq(true)
+      expect(GameLogic.prove_line(test_board, coordiantes2, vec)).to eq(false)
     end
   end
 

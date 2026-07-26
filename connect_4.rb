@@ -55,7 +55,7 @@ while(!game_over)
     puts 'Thank you for playing. The game has ended in a tie. Please try again'
     game_over = true
   end
-  if GameLogic.game_win(game_board, index )
+  if GameLogic.game_win(game_board)
     puts "Thank you for playing #{game_turn ? 'Player Two Wins' : 'Player One Wins'}"
     game_over = true
   end
